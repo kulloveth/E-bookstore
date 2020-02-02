@@ -16,13 +16,13 @@ import kulloveth.developer.com.e_bookshop.models.Category;
 public interface BookDao {
 
     @Insert
-    void insertBook(Category category);
+    void insertBook(Book book);
 
     @Update
-    void updateBook(Category category);
+    void updateBook(Book book);
 
     @Delete
-    void deleteBook(Category category);
+    void deleteBook(Book book);
 
     @Query("Select * from books_table where category_id = :categoryId")
     LiveData<List<Book>> getBooks(int categoryId);
