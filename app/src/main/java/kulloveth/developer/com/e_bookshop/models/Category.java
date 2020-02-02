@@ -1,6 +1,8 @@
 package kulloveth.developer.com.e_bookshop.models;
 
 import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+import androidx.databinding.library.baseAdapters.BR;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -27,27 +29,34 @@ public class Category extends BaseObservable {
         CategoryDescription = categoryDescription;
     }
 
+
+    @Bindable
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+        notifyPropertyChanged(BR.id);
     }
 
+    @Bindable
     public String getCategoryName() {
         return CategoryName;
     }
 
     public void setCategoryName(String categoryName) {
         CategoryName = categoryName;
+        notifyPropertyChanged(BR.categoryName);
     }
 
+    @Bindable
     public String getCategoryDescription() {
         return CategoryDescription;
     }
 
     public void setCategoryDescription(String categoryDescription) {
         CategoryDescription = categoryDescription;
+        notifyPropertyChanged(BR.categoryDescription);
     }
 }
