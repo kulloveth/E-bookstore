@@ -9,13 +9,11 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import java.util.Locale;
-
 import kulloveth.developer.com.e_bookshop.models.Book;
 import kulloveth.developer.com.e_bookshop.models.Category;
 
 
-@Database(entities = {Locale.Category.class, Book.class}, version = 1)
+@Database(entities = {Category.class, Book.class}, version = 2)
 public abstract class BookDatabase extends RoomDatabase {
 
     public abstract CategoryDao categoryDao();
@@ -47,12 +45,8 @@ public abstract class BookDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            return null;
-        }
 
-        public InitialDataAsyncTask(BookDatabase bookDatabase) {
-            categoryDao = bookDatabase.categoryDao();
-            bookDao = bookDatabase.bookDao();
+
 
             Category category1 = new Category();
             category1.setCategoryName("programing");
@@ -77,9 +71,9 @@ public abstract class BookDatabase extends RoomDatabase {
             book1.setCategoryId(1);
 
             Book book2 = new Book();
-            book1.setBookName("code with kotlin");
-            book1.setUnitPrice("$150.45");
-            book1.setCategoryId(1);
+            book2.setBookName("code with kotlin");
+            book2.setUnitPrice("$150.45");
+            book2.setCategoryId(1);
 
             Book book3 = new Book();
             book3.setBookName("Love Your Self");
@@ -98,8 +92,8 @@ public abstract class BookDatabase extends RoomDatabase {
 
             Book book6 = new Book();
             book6.setBookName("Stories of Tomorrow");
-            book3.setUnitPrice("$100.45");
-            book3.setCategoryId(3);
+            book6.setUnitPrice("$100.45");
+            book6.setCategoryId(3);
 
             bookDao.insertBook(book1);
             bookDao.insertBook(book2);
@@ -107,6 +101,13 @@ public abstract class BookDatabase extends RoomDatabase {
             bookDao.insertBook(book4);
             bookDao.insertBook(book5);
             bookDao.insertBook(book6);
+
+            return null;
+        }
+
+        public InitialDataAsyncTask(BookDatabase bookDatabase) {
+            categoryDao = bookDatabase.categoryDao();
+            bookDao = bookDatabase.bookDao();
 
         }
     }

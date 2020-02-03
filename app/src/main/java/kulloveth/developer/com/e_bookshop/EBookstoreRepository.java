@@ -50,6 +50,13 @@ public class EBookstoreRepository {
     public  void deleteBook(Book book){
         new DeleteBookAsyncTask(bookDao).execute(book);
     }
+    public  void updateCategory(Category category){
+        new UpdateCategoryAsyncTask(categoryDao).execute(category);
+    }
+
+    public  void updateBook(Book book){
+        new UpdateBookAsyncTask(bookDao).execute(book);
+    }
 
     private static class InsertCategoryAsyncTask extends AsyncTask<Category, Void, Void> {
         private CategoryDao categoryDao;
