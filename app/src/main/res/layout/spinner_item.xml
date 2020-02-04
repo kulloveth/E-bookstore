@@ -4,7 +4,5 @@
     android:layout_height="wrap_content"
     android:textSize="25sp"
     android:gravity="center"
-    android:padding="@dimen/dimens_16dp"
-    android:layout_margin="@dimen/dimens_16dp"
-    android:background="@color/colorPrimary"/>
+    android:layout_margin="@dimen/dimens_16dp" />
 

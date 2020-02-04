@@ -1,5 +1,6 @@
 package kulloveth.developer.com.e_bookshop.models;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.library.baseAdapters.BR;
@@ -15,18 +16,18 @@ public class Category extends BaseObservable {
     private int id;
 
     @ColumnInfo(name = "category_name")
-    private String CategoryName;
+    private String categoryName;
 
     @ColumnInfo(name = "category_description")
-    private String CategoryDescription;
+    private String categoryDescription;
 
     public Category() {
     }
 
     public Category(int id, String categoryName, String categoryDescription) {
         this.id = id;
-        CategoryName = categoryName;
-        CategoryDescription = categoryDescription;
+        this.categoryName = categoryName;
+        this.categoryDescription = categoryDescription;
     }
 
 
@@ -42,21 +43,27 @@ public class Category extends BaseObservable {
 
     @Bindable
     public String getCategoryName() {
-        return CategoryName;
+        return categoryName;
     }
 
     public void setCategoryName(String categoryName) {
-        CategoryName = categoryName;
+        this.categoryName = categoryName;
         notifyPropertyChanged(BR.categoryName);
     }
 
     @Bindable
     public String getCategoryDescription() {
-        return CategoryDescription;
+        return categoryDescription;
     }
 
     public void setCategoryDescription(String categoryDescription) {
-        CategoryDescription = categoryDescription;
+        this.categoryDescription = categoryDescription;
         notifyPropertyChanged(BR.categoryDescription);
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return this.categoryName;
     }
 }
