@@ -1,7 +1,7 @@
 package kulloveth.developer.com.e_bookshop;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +24,7 @@ import kulloveth.developer.com.e_bookshop.models.Book;
 import kulloveth.developer.com.e_bookshop.models.Category;
 
 public class MainActivity extends AppCompatActivity {
+
     MainActivityViewModel viewModel;
     private ActivityMainBinding activityMainBinding;
     MainActivityClickHandlers activityClickHandlers;
@@ -31,8 +32,11 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Book> bookArrayList;
     private Category selectedCategory;
     private RecyclerView booksRecyclerView;
-
     BookAdapter booksAdapter;
+    private int selectedBookId;
+
+    public static final int ADD_BOOK_REQUEST_CODE = 1;
+    public static final int EDIT_BOOK_REQUEST_CODE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,24 +57,14 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(List<Category> categories) {
 
                 categoryList = (ArrayList<Category>) categories;
-                for (Category category : categories) {
-                    Log.d("My ", "onChanged: " + category.getCategoryName());
-
-                    showOnSpinner();
-                }
+//                for (Category category : categories) {
+//                    Log.d("My ", "onChanged: " + category.getCategoryName());
+//
+//                    showOnSpinner();
+//                }
+                showOnSpinner();
             }
         });
-
-        viewModel.getBookLiveData(3).observe(this, new Observer<List<Book>>() {
-            @Override
-            public void onChanged(List<Book> books) {
-                for (Book book : books) {
-                    Log.d("My Tag", "onChanged: " + book.getBookName());
-                }
-            }
-        });
-
-
     }
 
     private void showOnSpinner() {
@@ -100,17 +94,33 @@ public class MainActivity extends AppCompatActivity {
         booksAdapter = new BookAdapter();
         booksRecyclerView.setAdapter(booksAdapter);
         booksAdapter.setBookArrayList(bookArrayList);
+        booksAdapter.setListener(new BookAdapter.OnItemClickListener() {
+            @Override
+            public void onItemCLicked(Book book) {
+                selectedBookId = book.getBookId();
+                Intent intent = new Intent(MainActivity.this, AddEditActivity.class);
+                intent.putExtra(AddEditActivity.BOOK_ID, selectedBookId);
+                intent.putExtra(AddEditActivity.BOOK_NAME, book.getBookName());
+                intent.putExtra(AddEditActivity.UNIT_PRICE, book.getUnitPrice());
+                startActivityForResult(intent,EDIT_BOOK_REQUEST_CODE);
+
+
+            }
+        });
     }
 
     public class MainActivityClickHandlers {
         public void onFabClicked(View view) {
             Toast.makeText(MainActivity.this, "fab toasted", Toast.LENGTH_LONG).show();
+
+            Intent intent = new Intent(MainActivity.this, AddEditActivity.class);
+            startActivityForResult(intent, ADD_BOOK_REQUEST_CODE);
         }
 
         public void selectedItem(AdapterView<?> parent, View view, int pos, long id) {
             selectedCategory = (Category) parent.getItemAtPosition(pos);
-            String message = "id is" + selectedCategory.getId() + "\n name is " + selectedCategory.getCategoryName();
-            Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+//            String message = "id is" + selectedCategory.getId() + "\n name is " + selectedCategory.getCategoryName();
+//            Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
             loadBookList(selectedCategory.getId());
 
         }
