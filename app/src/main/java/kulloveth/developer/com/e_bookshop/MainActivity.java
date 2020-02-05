@@ -105,13 +105,13 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(AddEditActivity.BOOK_ID, selectedBookId);
                 intent.putExtra(AddEditActivity.BOOK_NAME, book.getBookName());
                 intent.putExtra(AddEditActivity.UNIT_PRICE, book.getUnitPrice());
-                startActivityForResult(intent,EDIT_BOOK_REQUEST_CODE);
+                startActivityForResult(intent, EDIT_BOOK_REQUEST_CODE);
 
 
             }
         });
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
@@ -147,14 +147,14 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         int categoryId = selectedCategory.getId();
-        if (requestCode  == ADD_BOOK_REQUEST_CODE && resultCode == RESULT_OK){
+        if (requestCode == ADD_BOOK_REQUEST_CODE && resultCode == RESULT_OK) {
             Book book = new Book();
             book.setCategoryId(categoryId);
             book.setBookName(data.getStringExtra(AddEditActivity.BOOK_NAME));
             book.setUnitPrice(data.getStringExtra(AddEditActivity.UNIT_PRICE));
             viewModel.insertNewBook(book);
 
-        }else if(requestCode  == EDIT_BOOK_REQUEST_CODE && resultCode == RESULT_OK){
+        } else if (requestCode == EDIT_BOOK_REQUEST_CODE && resultCode == RESULT_OK) {
 
             Book book = new Book();
             book.setCategoryId(categoryId);

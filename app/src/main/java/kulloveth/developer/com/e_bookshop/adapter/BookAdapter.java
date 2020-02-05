@@ -6,10 +6,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import kulloveth.developer.com.e_bookshop.BooksDiffCallback;
 import kulloveth.developer.com.e_bookshop.R;
 import kulloveth.developer.com.e_bookshop.databinding.BookListItemBinding;
 import kulloveth.developer.com.e_bookshop.models.Book;
@@ -38,9 +40,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         return bookArrayList.size();
     }
 
-    public void setBookArrayList(ArrayList<Book> bookArrayList) {
-        this.bookArrayList = bookArrayList;
-        notifyDataSetChanged();
+    public void setBookArrayList(ArrayList<Book> newBooks) {
+//        this.bookArrayList = bookArrayList;
+//        notifyDataSetChanged();
+        final DiffUtil.DiffResult bookList = DiffUtil.calculateDiff(new BooksDiffCallback(bookArrayList, newBooks), false);
+        bookArrayList = newBooks;
+        bookList.dispatchUpdatesTo(BookAdapter.this);
     }
 
     class BookViewHolder extends RecyclerView.ViewHolder {
