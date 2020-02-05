@@ -22,9 +22,9 @@
         tools:context=".AddEditActivity">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:id="@+id/app_bar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -32,9 +32,9 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                app:titleTextColor="@android:color/white"
                 android:layout_height="match_parent"
-                android:background="@color/orange" />
+                android:background="@color/orange"
+                app:titleTextColor="@android:color/white" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -53,8 +53,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/book_name"
                 android:layout_width="match_parent"
-                android:text="@{book.bookName}"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="@={book.bookName}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,7 +74,7 @@
                 android:id="@+id/unit_price"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-               android:text="@{book.unitPrice}" />
+                android:text="@={book.unitPrice}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,8 +84,8 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="@dimen/dimens_16dp"
-            android:text="Save"
             android:onClick="@{clickHandler::onSubmitButtonClicked}"
+            android:text="Save"
             app:layout_constraintTop_toBottomOf="@id/unit_priceInputLayout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

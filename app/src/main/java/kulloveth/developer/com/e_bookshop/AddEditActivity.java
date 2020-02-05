@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
@@ -30,7 +31,6 @@ public class AddEditActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
         book = new Book();
         activityAddEditBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_edit);
         activityAddEditBinding.setBook(book);
@@ -40,7 +40,7 @@ public class AddEditActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         if (intent.hasExtra(BOOK_ID)) {
-           getSupportActionBar().setTitle("Edit Text");
+          // getSupportActionBar().setTitle("Edit Text");
             book.setBookName(intent.getStringExtra(BOOK_NAME));
             book.setUnitPrice(intent.getStringExtra(UNIT_PRICE));
         } else {
@@ -70,4 +70,6 @@ public class AddEditActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }
