@@ -4,9 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
@@ -29,22 +30,23 @@ public class AddEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         book = new Book();
         activityAddEditBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_edit);
         activityAddEditBinding.setBook(book);
         addEditClickHandler = new AddEditClickHandler(this);
         activityAddEditBinding.setClickHandler(addEditClickHandler);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
 
         Intent intent = getIntent();
 
         if (intent.hasExtra(BOOK_ID)) {
-          // getSupportActionBar().setTitle("Edit Text");
+            getSupportActionBar().setTitle("Update Book");
             book.setBookName(intent.getStringExtra(BOOK_NAME));
             book.setUnitPrice(intent.getStringExtra(UNIT_PRICE));
         } else {
-           getSupportActionBar(). setTitle("New Book");
+            getSupportActionBar().setTitle("Add New Book");
         }
 
 
@@ -63,9 +65,9 @@ public class AddEditActivity extends AppCompatActivity {
                 Toast.makeText(context, "Name cannot be empty", Toast.LENGTH_LONG).show();
             } else {
                 Intent intent = new Intent();
-                intent.putExtra(BOOK_NAME,book.getBookName());
-                intent.putExtra(UNIT_PRICE,book.getUnitPrice());
-                setResult(RESULT_OK,intent);
+                intent.putExtra(BOOK_NAME, book.getBookName());
+                intent.putExtra(UNIT_PRICE, book.getUnitPrice());
+                setResult(RESULT_OK, intent);
                 finish();
             }
         }

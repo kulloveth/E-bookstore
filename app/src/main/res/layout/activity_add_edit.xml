@@ -34,7 +34,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/orange"
+                app:fontFamily="@font/alegreya_sans_sc_thin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:titleTextColor="@android:color/white" />
+
+            <!--                <TextView-->
+            <!--                    android:id="@+id/title_txt"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:text="title"-->
+            <!--                    app:fontFamily="@font/alegreya_sans_sc_thin" />-->
+            <!--            </androidx.appcompat.widget.Toolbar>-->
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -84,6 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="@dimen/dimens_16dp"
+            android:backgroundTint="@color/orange"
             android:onClick="@{clickHandler::onSubmitButtonClicked}"
             android:text="Save"
             app:layout_constraintTop_toBottomOf="@id/unit_priceInputLayout" />
